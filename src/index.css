@@ -1,0 +1,428 @@
+
+/* ------------------------------
+   GENERAL STYLING
+--------------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0b1120;
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 30px 15px;
+}
+
+.container {
+    max-width: 1050px;
+    margin: auto;
+}
+
+/* ------------------------------
+   HEADER
+--------------------------------*/
+
+.header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-icon {
+    font-size: 32px;
+}
+
+.logo h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo h1 span {
+    color: #38bdf8;
+}
+
+.header p {
+    color: #94a3b8;
+    font-size: 15px;
+}
+
+/* ------------------------------
+   SETTINGS SECTION
+--------------------------------*/
+
+.settings {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 20px;
+    background: #151e30;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.setting-group label {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.setting-group select {
+    width: 180px;
+    padding: 12px;
+    background: #0b1120;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.setting-group select:focus {
+    border-color: #38bdf8;
+}
+
+.start-btn,
+.restart-btn {
+    padding: 13px 25px;
+    background: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover,
+.restart-btn:hover {
+    background: #0284c7;
+    transform: translateY(-2px);
+}
+
+/* ------------------------------
+   STATISTICS CARDS
+--------------------------------*/
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: #151e30;
+    padding: 22px 15px;
+    border: 1px solid #25334a;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #38bdf8;
+}
+
+.stat-card p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    color: #38bdf8;
+    font-size: 32px;
+    margin-bottom: 7px;
+}
+
+.stat-card span {
+    color: #64748b;
+    font-size: 12px;
+}
+
+/* ------------------------------
+   TYPING SECTION
+--------------------------------*/
+
+.typing-section {
+    background: #151e30;
+    border: 1px solid #25334a;
+    padding: 25px;
+    border-radius: 14px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.section-heading h2 {
+    font-size: 21px;
+}
+
+#testStatus {
+    color: #38bdf8;
+    font-size: 13px;
+}
+
+.paragraph {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 22px;
+    min-height: 145px;
+    font-size: 19px;
+    line-height: 2;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+}
+
+/* Correct and incorrect character styling */
+
+.correct {
+    color: #4ade80;
+}
+
+.incorrect {
+    color: #f87171;
+    background: #451a24;
+    border-radius: 3px;
+}
+
+.current {
+    border-left: 2px solid #38bdf8;
+}
+
+/* Typing input */
+
+#typingInput {
+    width: 100%;
+    height: 140px;
+    resize: vertical;
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 18px;
+    color: white;
+    font-size: 16px;
+    line-height: 1.7;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#typingInput:focus {
+    border-color: #38bdf8;
+}
+
+#typingInput:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.typing-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+/* ------------------------------
+   FINAL RESULTS
+--------------------------------*/
+
+.result-section {
+    background: #151e30;
+    padding: 25px;
+    border: 1px solid #25334a;
+    border-radius: 14px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.result-section h2 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.result-message {
+    color: #94a3b8;
+    margin-bottom: 22px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.result-card {
+    background: #0b1120;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.result-card span {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.result-card h2 {
+    font-size: 30px;
+    margin-top: 12px;
+}
+
+.restart-btn {
+    background: #16a34a;
+}
+
+.restart-btn:hover {
+    background: #15803d;
+}
+
+/* Hide elements when required */
+
+.hidden {
+    display: none;
+}
+
+/* ------------------------------
+   BEST SCORE
+--------------------------------*/
+
+.best-score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #151e30;
+    padding: 20px 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+    border: 1px solid #25334a;
+}
+
+.best-score p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.best-score h2 {
+    color: #facc15;
+    font-size: 25px;
+}
+
+.trophy {
+    font-size: 32px;
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+
+footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 35px;
+    line-height: 2;
+}
+
+/* ------------------------------
+   RESPONSIVE DESIGN
+--------------------------------*/
+
+@media (max-width: 768px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .settings {
+        align-items: stretch;
+    }
+
+    .setting-group {
+        flex: 1;
+    }
+
+    .setting-group select {
+        width: 100%;
+    }
+
+    .start-btn {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 20px 10px;
+    }
+
+    .logo h1 {
+        font-size: 26px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 17px 8px;
+    }
+
+    .stat-card h2 {
+        font-size: 25px;
+    }
+
+    .typing-section {
+        padding: 15px;
+    }
+
+    .paragraph {
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
