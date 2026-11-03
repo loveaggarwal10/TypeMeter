@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import { getRandomParagraph } from "../data/paragraphs";
 import useBestScore from "./useBestScore";
 
-// Holds ALL the logic of the typing test.
-// Components only receive the values and functions they need.
-
-// Count how many typed characters match the paragraph.
+// Count correct and incorrect characters typed by the user.
 function countCharacters(typedText, paragraph) {
   let correct = 0;
   let incorrect = 0;
@@ -18,101 +15,95 @@ function countCharacters(typedText, paragraph) {
   return { correct, incorrect };
 }
 
-// WPM = (correct characters / 5) per minute.
-function calculateWpm(correct, elapsedSeconds) {
+// Standard typing-test formula: correct characters / 5 / minutes.
+function calculateWpm(correctCharacters, elapsedSeconds) {
   if (elapsedSeconds <= 0) return 0;
-  return Math.round(correct / 5 / (elapsedSeconds / 60));
+  return Math.round(correctCharacters / 5 / (elapsedSeconds / 60));
 }
 
 export default function useTypingTest() {
-  // ----- settings -----
   const [difficulty, setDifficulty] = useState("easy");
   const [duration, setDuration] = useState(30);
 
-  // ----- test state -----
-  const [status, setStatus] = useState("idle"); // idle | running | finished
-  const [runId, setRunId] = useState(0); // changes on every start, restarts the timer
+  const [status, setStatus] = useState("idle");
+  const [runId, setRunId] = useState(0);
   const [paragraph, setParagraph] = useState("");
   const [typedText, setTypedText] = useState("");
   const [timeLeft, setTimeLeft] = useState(30);
   const [wpm, setWpm] = useState(0);
 
   const { bestWPM, updateBestScore } = useBestScore();
-
   const isRunning = status === "running";
 
-  // ----- values calculated from the typed text -----
   const { correct, incorrect } = countCharacters(typedText, paragraph);
   const accuracy =
-    typedText.length > 0 ? Math.round((correct / typedText.length) * 100) : 100;
+    typedText.length > 0
+      ? Math.round((correct / typedText.length) * 100)
+      : 100;
 
-  // ----- timer: counts down every second while the test is running -----
+  const elapsedSeconds = duration - timeLeft;
+
+  // Run one timer while the test is active. Cleanup prevents duplicate timers.
   useEffect(() => {
     if (!isRunning) return;
 
-    const interval = setInterval(() => {
-      setTimeLeft((time) => time - 1);
+    const timer = setInterval(() => {
+      setTimeLeft((previousTime) => Math.max(previousTime - 1, 0));
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [isRunning, runId]);
 
-  // ----- finish the test when the time reaches 0 -----
+  // Finish once the countdown reaches zero.
   useEffect(() => {
-    if (isRunning && timeLeft <= 0) {
+    if (isRunning && timeLeft === 0) {
       const finalWpm = calculateWpm(correct, duration);
-
-      setTimeLeft(0);
       setWpm(finalWpm);
       setStatus("finished");
       updateBestScore(finalWpm);
     }
-  }, [isRunning, timeLeft]);
+  }, [isRunning, timeLeft, correct, duration, updateBestScore]);
 
-  // ----- actions -----
   function startTest() {
     setParagraph(getRandomParagraph(difficulty));
     setTypedText("");
     setTimeLeft(duration);
     setWpm(0);
     setStatus("running");
-    setRunId((id) => id + 1);
+    setRunId((previousId) => previousId + 1);
   }
 
   function handleTyping(event) {
     if (!isRunning) return;
 
-    const text = event.target.value;
-    const { correct } = countCharacters(text, paragraph);
+    // Do not allow typing beyond the paragraph length.
+    const text = event.target.value.slice(0, paragraph.length);
+    const { correct: correctCharacters } = countCharacters(text, paragraph);
 
     setTypedText(text);
-    setWpm(calculateWpm(correct, duration - timeLeft));
+    setWpm(calculateWpm(correctCharacters, Math.max(elapsedSeconds, 1)));
   }
 
   function changeDuration(newDuration) {
     setDuration(newDuration);
-    // Show the new time on the timer when no test is running.
     if (!isRunning) setTimeLeft(newDuration);
   }
 
   return {
-    // settings
     difficulty,
     duration,
     setDifficulty,
     changeDuration,
-    // test state
     status,
     isRunning,
     paragraph,
     typedText,
     timeLeft,
-    // statistics
     wpm,
     accuracy,
     errors: incorrect,
+    correct,
     bestWPM,
-    // actions
     startTest,
     handleTyping,
   };

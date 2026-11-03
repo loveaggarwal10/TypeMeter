@@ -1,12 +1,10 @@
 import { useEffect, useRef } from "react";
 
-// The textarea where the user types.
 export default function TypingInput({ value, disabled, onChange }) {
   const inputRef = useRef(null);
 
-  // Focus the textarea as soon as typing is enabled (test started).
   useEffect(() => {
-    if (!disabled) inputRef.current.focus();
+    if (!disabled) inputRef.current?.focus();
   }, [disabled]);
 
   return (
@@ -15,11 +13,12 @@ export default function TypingInput({ value, disabled, onChange }) {
       ref={inputRef}
       value={value}
       onChange={onChange}
-      placeholder="Start typing here..."
+      placeholder="Your typing area will be ready when you start the test..."
       disabled={disabled}
-      spellCheck="false"
+      spellCheck={false}
       autoComplete="off"
       autoCapitalize="off"
-    ></textarea>
+      aria-label="Type the paragraph here"
+    />
   );
 }

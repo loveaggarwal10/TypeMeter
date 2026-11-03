@@ -12,7 +12,6 @@ const durationOptions = [
   { value: 60, label: "60 Seconds" },
 ];
 
-// Difficulty + duration dropdowns and the Start button.
 export default function Settings({
   difficulty,
   duration,
@@ -22,7 +21,7 @@ export default function Settings({
   onStart,
 }) {
   return (
-    <section className="settings">
+    <section className="settings" aria-label="Test settings">
       <SettingSelect
         id="difficulty"
         label="Difficulty"
@@ -41,8 +40,8 @@ export default function Settings({
         onChange={(value) => onDurationChange(Number(value))}
       />
 
-      <button id="startBtn" className="start-btn" onClick={onStart}>
-        Start Test
+      <button className="start-btn" onClick={onStart} disabled={disabled}>
+        {disabled ? "Test Running..." : "Start Test"}
       </button>
     </section>
   );

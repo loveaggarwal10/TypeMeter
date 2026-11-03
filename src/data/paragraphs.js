@@ -2,9 +2,17 @@
 
 export const paragraphs = {
   easy: [
-    "The sun rises in the east and brings a beautiful new day. Every morning gives us a fresh chance to learn something new and work towards our dreams.",
-    "Reading books is a good habit. It improves our knowledge, develops our imagination and helps us understand the world in a better way.",
-    "Practice makes a person better. Small efforts every day can create big improvements over time. Never stop learning and trying new things.",
+    
+  "Every morning is a new chance to learn something useful and make our lives better. We should always try to improve ourselves by reading books, learning new skills, and spending time with people who make us happy. Small steps taken every day can help us achieve big goals in the future. The most important thing is to stay positive and never stop trying.",
+
+  "Life is full of beautiful moments, but sometimes we become so busy that we forget to enjoy them. Spending time with family, talking to friends, playing games, and visiting new places can make us feel happy. We should take care of our health and give ourselves enough time to rest. A happy life is not about having everything, but about enjoying what we already have.",
+
+  "College life is one of the most exciting parts of being a student. We meet new people, make friends, learn different subjects, and take part in many activities. Every day brings a new lesson and a new experience. Sometimes studies become difficult, but with regular practice and support from friends, we can solve most problems and move towards our dreams.",
+
+  "The world around us is changing every day. New machines, better phones, and faster computers have made many tasks easier. People can now study online, talk to friends from different countries, and learn new things without leaving their homes. Technology has become an important part of our daily lives, and learning how to use it wisely can help us in many ways.",
+
+  "A good friend is someone who stays with us during both happy and difficult times. Friends share their thoughts, help each other, and create memories that remain special for many years. We should always respect our friends, listen to their problems, and support them whenever possible. True friendship is not about how many friends we have, but about how much we care for each other."
+
   ],
 
   medium: [
